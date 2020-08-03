@@ -9,7 +9,7 @@ install:
 script:
   - black --check .
   - pytest
-  - pytest --cov=project-name --cov-fail-under=100
+  - pytest --cov=code_fmt --cov-fail-under=100
 after_success:
   - coveralls
 env:
