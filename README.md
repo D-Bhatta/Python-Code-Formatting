@@ -2,7 +2,20 @@
 
 Code and notes from a series of tutorials on code formatting in python
 
+- [Python-Code_Formatting](#python-code_formatting)
+  - [Tutorials](#tutorials)
+  - [Notes](#notes)
+    - [Notes for How to Write Beautiful Python Code With PEP 8](#notes-for-how-to-write-beautiful-python-code-with-pep-8)
+      - [Notes help](#notes-help)
+      - [Naming Conventions](#naming-conventions)
+
+## Tutorials
+
+1. [How to Write Beautiful Python Code With PEP 8](https://realpython.com/python-pep8/)
+
 ## Notes
+
+### Notes for [How to Write Beautiful Python Code With PEP 8](https://realpython.com/python-pep8/)
 
 1. Code is read much more often than it is written.
    1. Following a code standard like PEP-8 ensures that everyone writes code of the same standard, and thus it can eb understood by everyone.
@@ -285,12 +298,12 @@ Code and notes from a series of tutorials on code formatting in python
 
 56. Two other autoformatters, autopep8 and yapf, perform actions that are similar to what black does.
 
-## Notes help
+#### Notes help
 
 ```python
 ```
 
-### Naming Conventions
+#### Naming Conventions
 
 | Type     |                                                Naming Convention                                                |                                Examples |
 | :------- | :-------------------------------------------------------------------------------------------------------------: | --------------------------------------: |
