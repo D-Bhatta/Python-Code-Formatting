@@ -171,7 +171,119 @@ Code and notes from a series of tutorials on code formatting in python
         return x_1, x_2
     ```
 
-40. .
+40. Surround the following binary operators with a single space on either side:
+    1. Assignment operators (=, +=, -=, and so forth)
+    2. Comparisons (==, !=, >, <. >=, <=) and (is, is not, in, not in)
+    3. Booleans (and, not, or)
+41. When = is used to assign a default value to a function argument, do not surround it with spaces.
+42. When there’s more than one operator in a statement, adding a single space before and after each operator can look confusing. Instead, it is better to only add whitespace around the operators with the lowest priority, especially when performing mathematical manipulation.
+43. In slices, colons act as a binary operators. Therefore, there should be the same amount of whitespace either side.
+44. The following list outlines some cases where you should avoid adding whitespace
+    1. Immediately inside parentheses, brackets, or braces
+    2. Before a comma, semicolon, or colon
+    3. Before the open parenthesis that starts the argument list of a function call
+    4. Before the open bracket that starts an index or slice
+    5. Between a trailing comma and a closing parenthesis
+    6. To align assignment operators
+45. Don’t compare boolean values to True or False using the equivalence operator. You’ll often need to check if a boolean value is True or False.The use of the equivalence operator, ==, is unnecessary here. bool can only take values True or False.
+
+    ```python
+    # Not recommended
+    my_bool = 6 > 5
+    if my_bool == True:
+        return "6 is bigger than 5"
+    # Recommended
+    if my_bool:
+        return "6 is bigger than 5"
+    ```
+
+46. Use the fact that empty sequences are falsy in if statements. If you want to check whether a list is empty, you might be tempted to check the length of the list. If the list is empty, it’s length is 0 which is equivalent to False when used in an if statement. In Python any empty list, string, or tuple is falsy
+
+    ```python
+    # Not recommended
+    my_list = []
+    if not len(my_list):
+        print("List is empty!")
+    # Recommended
+    my_list = []
+    if not my_list:
+        print("List is empty!")
+    ```
+
+47. Use `is not` rather than `not ... is` in if statements. If you are trying to check whether a variable has a defined value, there are two options. The first is to evaluate an if statement with `x is not None`. A second option would be to evaluate `x is None` and then have an if statement based on `not` the outcome. While both options will be evaluated correctly, the first is simpler, so PEP 8 encourages it.
+
+    ```python
+    # Recommended
+    if x is not None:
+        return "x exists!"
+    # Not recommended
+    if not x is None:
+        return "x exists!"
+    ```
+
+48. Don’t use if x: when you mean if x is not None:. Sometimes, you may have a function with arguments that are None by default. A common mistake when checking if such an argument, arg, has been given a different value is to use
+
+    ```python
+    # Not Recommended
+    if arg:
+        pass
+    ```
+
+49. This code checks that arg is truthy. Instead, you want to check that arg is not None, so it would be better to use
+
+    ```python
+    # Recommended
+    if arg is not None:
+        pass
+    ```
+
+50. The mistake being made here is assuming that not None and truthy are equivalent. You could have set arg = []. As we saw above, empty lists are evaluated as falsy in Python. So, even though the argument arg has been assigned, the condition is not met, and so the code in the body of the if statement will not be executed
+51. Use .startswith() and .endswith() instead of slicing. If you were trying to check if a string word was prefixed, or suffixed, with the word cat, it might seem sensible to use list slicing. However, list slicing is prone to error, and you have to hardcode the number of characters in the prefix or suffix. It is also not clear to someone less familiar with Python list slicing what you are trying to achieve. However, this is not as readable as using `.startswith()`. Similarly, the same principle applies when you’re checking for suffixes. You could use `.endswith()`.
+
+    ```python
+    # Not recommended
+    if word[:3] == "cat":
+        print('The word starts with "cat"')
+    # Recommended
+    if word.startswith("cat"):
+        print('The word starts with "cat"')
+    # Not recommended
+    if file_name[-3:] == "jpg":
+        print("The file is a JPEG")
+    # Recommended
+    if file_name.endswith("jpg"):
+        print("The file is a JPEG")
+    ```
+
+52. Linters are programs that analyze code and flag errors. They provide suggestions on how to fix the error. Linters are particularly useful when installed as extensions to your text editor, as they flag errors and stylistic problems while you write.
+53. pycodestyle is a tool to check your Python code against some of the style conventions in PEP 8.
+
+    ```shell
+    $ pycodestyle code.py
+    code.py:1:17: E231 missing whitespace after ','
+    code.py:2:21: E231 missing whitespace after ','
+    code.py:6:19: E711 comparison to None should be 'if cond is None:'
+    ```
+
+54. flake8 is a tool that combines a debugger, pyflakes, with pycodestyle.
+
+    ```shell
+    $ flake8 code.py
+    code.py:1:17: E231 missing whitespace after ','
+    code.py:2:21: E231 missing whitespace after ','
+    code.py:3:17: E999 SyntaxError: invalid syntax
+    code.py:6:19: E711 comparison to None should be 'if cond is None:'
+    ```
+
+55. Autoformatters are programs that refactor your code to conform with PEP 8 automatically. Once such program is black, which autoformats code following most of the rules in PEP 8. One big difference is that it limits line length to 88 characters, rather than 79. If you want to alter the line length limit, then you can use the --line-length flag
+
+    ```shell
+    $ black --line-length=79 code.py
+    reformatted code.py
+    All done! ✨ 🍰 ✨
+    ```
+
+56. Two other autoformatters, autopep8 and yapf, perform actions that are similar to what black does.
 
 ## Notes help
 
